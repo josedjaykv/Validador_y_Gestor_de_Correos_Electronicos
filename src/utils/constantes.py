@@ -6,6 +6,3 @@ DOMINIO_DOCENTE = "@utv.edu.co"
 TIPO_ESTUDIANTE = "estudiante"
 TIPO_DOCENTE = "docente"
 
-# Mensajes del sistema
-MENSAJE_BIENVENIDA = "Bienvenido al Sistema de Gestión de Correos Electrónicos"
-MENSAJE_DESPEDIDA = "Gracias por usar el sistema. ¡Hasta pronto!" 
