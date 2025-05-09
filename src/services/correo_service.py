@@ -8,6 +8,7 @@
 from typing import List, Optional
 from models.correo import Correo
 from utils.constantes import TIPO_ESTUDIANTE, TIPO_DOCENTE
+import difflib
 
 class CorreoService:
     _correos: List[Correo] = []
@@ -53,12 +54,16 @@ class CorreoService:
         return [correo for correo in cls._correos if correo.clasificacion == TIPO_DOCENTE]
 
     @classmethod
-    def buscar_por_direccion(cls, direccion: str) -> Optional[Correo]:
-        """Busca un correo por su dirección exacta."""
+    def buscar_por_direccion(cls, direccion: str) -> list[Correo]:
+        """Busca todos los correos con direcciones similares a la buscada."""
+        direcciones = [correo.direccion.lower() for correo in cls._correos]
+        similares = difflib.get_close_matches(direccion.lower(), direcciones, n=len(direcciones), cutoff=0.3)
+        
+        coincidencias = []
         for correo in cls._correos:
-            if correo.direccion == direccion:
-                return correo
-        return None
+            if correo.direccion.lower() in similares:
+                coincidencias.append(correo)
+        return coincidencias
 
     @classmethod
     def buscar_por_dominio(cls, dominio: str) -> List[Correo]:

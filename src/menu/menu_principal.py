@@ -135,10 +135,11 @@ def ver_correos_docentes():
 
 def buscar_por_direccion():
     direccion = input("Ingrese la dirección de correo a buscar: ")
-    correo = CorreoService.buscar_por_direccion(direccion)
-    if correo:
-        print("\nCorreo encontrado:")
-        print(correo)
+    correos = CorreoService.buscar_por_direccion(direccion)
+    if correos:
+        print("\nCorreos encontrados:")
+        for correo in correos:
+            print("%s - %s" % (correo.direccion, correo.clasificacion))
     else:
         print("No se encontró ningún correo con esa dirección")
 
