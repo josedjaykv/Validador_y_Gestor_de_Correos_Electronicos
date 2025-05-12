@@ -5,7 +5,7 @@
    • Docentes: terminan con "@utv.edu.co"
 - Almacenar los correos válidos junto con su clasificación en una colección adecuada.'''
 
-from typing import List, Optional
+from typing import List
 from models.correo import Correo
 from utils.constantes import TIPO_ESTUDIANTE, TIPO_DOCENTE
 import difflib
@@ -58,7 +58,6 @@ class CorreoService:
         """Busca todos los correos con direcciones similares a la buscada."""
         direcciones = [correo.direccion.lower() for correo in cls._correos]
         similares = difflib.get_close_matches(direccion.lower(), direcciones, n=len(direcciones), cutoff=0.3)
-        
         coincidencias = []
         for correo in cls._correos:
             if correo.direccion.lower() in similares:
